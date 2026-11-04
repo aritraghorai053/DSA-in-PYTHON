@@ -1,13 +1,21 @@
+
+from math import sqrt
+
 class Solution:
     def kthFactor(self, n: int, k: int) -> int:
-        
+        small = []
+        large = []
 
-        result = 0
-
-        for i in range(1, n+1):
+        for i in range(1, int(sqrt(n)) + 1):
             if n % i == 0:
-                result += 1
-                if result == k:
-                    return i
+                small.append(i)
+
+                if i != n // i:
+                    large.append(n // i)
+
+        factors = small + large[::-1]
+
+        if k <= len(factors):
+            return factors[k - 1]
 
         return -1
