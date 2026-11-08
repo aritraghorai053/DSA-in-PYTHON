@@ -1,17 +1,17 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        # if len(magazine) != len(ransomNote):
-        #     return False
 
-        freq = {}
+        freq = [0] * 26
 
         for ch in magazine:
-            freq[ch] = freq.get(ch, 0) + 1
+            freq[ord(ch) - ord('a')] += 1
 
         for ch in ransomNote:
-            if ch not in freq or freq[ch] == 0:
+            idx = ord(ch) - ord('a')
+
+            if freq[idx] == 0:
                 return False
 
-            freq[ch] -= 1
+            freq[idx] -= 1
 
         return True
