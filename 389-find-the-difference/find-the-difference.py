@@ -9,5 +9,3 @@ class Solution:
                 return ch
 
             freq[ch] -= 1
-
-        return freq
