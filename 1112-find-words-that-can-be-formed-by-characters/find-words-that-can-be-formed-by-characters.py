@@ -1,14 +1,24 @@
+
 class Solution:
-    def countCharacters(self, words: list[str], chars: str) -> int:
-        freq = Counter(chars)
+    def countCharacters(self, words: List[str], chars: str) -> int:
+
+        freq = [0] * 26
+
+        for ch in chars:
+            freq[ord(ch) - 97] += 1
+
         total = 0
 
         for word in words:
-            word_freq = Counter(word)
+            temp = freq.copy()
 
-            for ch in word_freq:
-                if word_freq[ch] > freq[ch]:
+            for ch in word:
+                idx = ord(ch) - 97
+                temp[idx] -= 1
+
+                if temp[idx] < 0:
                     break
             else:
-                    total += len(word)
+                total += len(word)
+
         return total
