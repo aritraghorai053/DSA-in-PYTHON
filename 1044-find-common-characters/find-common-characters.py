@@ -1,14 +1,21 @@
 class Solution:
-    def commonChars(self, words: list[str]) -> list[str]:
-        common = Counter(words[0])
+    def commonChars(self, words: List[str]) -> List[str]:
 
-        for word in words[1:]:
-            freq = Counter(word)
-            common &= freq
+        common = [float('inf')] * 26
+
+        for word in words:
+            freq = [0] * 26
+
+            for ch in word:
+                freq[ord(ch) - ord('a')] += 1
+
+            for i in range(26):
+                common[i] = min(common[i], freq[i])
 
         result = []
 
-        for char, count in common.items():
-            result.extend([char] * count)
+        for i in range(26):
+            for _ in range(common[i]):
+                result.append(chr(i + ord('a')))
 
         return result
