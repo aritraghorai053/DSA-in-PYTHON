@@ -1,17 +1,17 @@
 class Solution:
     def relativeSortArray(self, arr1: list[int], arr2: list[int]) -> list[int]:
-        index = 0
-        for num in arr2:
-            for i in range(len(arr1)):
-                if arr1[i] == num:
-                    arr1[index], arr1[i] = arr1[i], arr1[index]
-                    index += 1
-        
-        for i in range(index, len(arr1)):
-            min_idx = i
+        freq = {}
 
-            for j in range(i + 1, len(arr1)):
-                if arr1[j] < arr1[min_idx]:
-                    min_idx = j
-            arr1[i], arr1[min_idx] = arr1[min_idx], arr1[i]
-        return arr1
+        for num in arr1:
+            freq[num] = freq.get(num, 0) + 1
+
+        result = []
+
+        for num in arr2:
+            result.extend([num] * freq[num])
+            del freq[num]
+
+        for num in sorted(freq):
+            result.extend([num] * freq[num])
+
+        return result
