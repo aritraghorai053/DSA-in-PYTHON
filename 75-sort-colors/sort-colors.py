@@ -1,13 +1,18 @@
 class Solution:
     def sortColors(self, nums: list[int]) -> None:
-        n = len(nums)
+        low = 0
+        mid = 0
+        high = len(nums) - 1
 
-        for i in range(n - 1):
-            min_idx = i
+        while mid <= high:
+            if nums[mid] == 0:
+                nums[low], nums[mid] = nums[mid], nums[low]
+                low += 1
+                mid += 1
 
-            for j in range(i + 1, n):
-                if nums[j] < nums[min_idx]:
-                    min_idx = j
+            elif nums[mid] == 1:
+                mid += 1
 
-            nums[i], nums[min_idx] = nums[min_idx], nums[i]
-        
+            else:
+                nums[mid], nums[high] = nums[high], nums[mid]
+                high -= 1
