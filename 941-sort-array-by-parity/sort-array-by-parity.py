@@ -1,10 +1,18 @@
 class Solution:
     def sortArrayByParity(self, nums: list[int]) -> list[int]:
-        n = len(nums)
 
-        for i in range (n-2, -1, -1):
-            for j in range (0, i+1):
-                if nums[j] % 2 == 1 and nums[j+1] % 2 == 0:
-                    nums[j], nums[j+1] = nums[j+1], nums[j]
+        left = 0
+        right = len(nums) - 1
+
+        while left < right:
+
+            if nums[left] % 2 == 0:
+                left += 1
+
+            elif nums[right] % 2 == 1:
+                right -= 1
+
+            else:
+                nums[left], nums[right] = nums[right], nums[left]
 
         return nums
