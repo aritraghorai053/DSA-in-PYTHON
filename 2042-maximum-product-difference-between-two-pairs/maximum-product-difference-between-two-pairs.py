@@ -1,6 +1,19 @@
 class Solution:
     def maxProductDifference(self, nums: List[int]) -> int:
-        nums.sort()
-        n = len(nums)
+        small1 = small2 = float('inf')
+        large1 = large2 = float('-inf')
 
-        return (nums[n-1] * nums[n-2]) - (nums[0] * nums[1])
+        for num in nums:
+            if num < small1:
+                small2 = small1
+                small1 = num
+            elif num < small2:
+                small2 = num
+
+            if num > large1:
+                large2 = large1
+                large1 = num
+            elif num > large2:
+                large2 = num
+
+        return (large1 * large2) - (small1 * small2)
