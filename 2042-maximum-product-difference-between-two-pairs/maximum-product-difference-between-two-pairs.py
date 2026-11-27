@@ -3,10 +3,4 @@ class Solution:
         nums.sort()
         n = len(nums)
 
-
-        w = nums[0]
-        x = nums[1]
-        y = nums[n-2]
-        z = nums[n-1]
-
-        return (y * z) - (w * x)
+        return (nums[n-1] * nums[n-2]) - (nums[0] * nums[1])
